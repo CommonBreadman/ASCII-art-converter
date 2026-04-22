@@ -27,9 +27,16 @@ int main(){
 	);
 	vector<vector<string>> arr1(height, vector<string>(width));
 	int div;
-	cout << "add threshold (0-10): ";
-	cin >> div;
-	cout << endl;
+	do {
+		div = 0;
+		cout << "set threshold (0-10): ";
+		cin >> div;
+		cout << endl;
+		if (div > 10 || div < 0) {
+			cout << "ERROR: Type in a value from 0 to 10." << endl;
+		}
+	} while (div > 10 || div < 0);
+
 	div += 30;
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
@@ -42,13 +49,13 @@ int main(){
 				arr1[i][j] = "--";
 				break;
 			case 3:
-				arr1[i][j] = "++";
+				arr1[i][j] = "==";
 				break;
 			case 4:
-				arr1[i][j] = "**";
+				arr1[i][j] = "++";
 				break;
 			case 5:
-				arr1[i][j] = "==";
+				arr1[i][j] = "**";
 				break;
 			case 6:
 				arr1[i][j] = "%%";
