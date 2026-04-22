@@ -14,7 +14,6 @@ int main(){
 	cin >> title;
 	cout << endl;
 	unsigned char* maze = stbi_load(title.c_str(), &x, &y, NULL, 1);
-
 	int width;
 	cout << "Give desired width: ";
 	cin >> width;
@@ -22,18 +21,20 @@ int main(){
 	int height = (int)((float)y / x * width);
 	vector<unsigned char> newImage(width * height);
 	stbir_pixel_layout dp = static_cast<stbir_pixel_layout>(1);
-
 	stbir_resize_uint8_linear(
 		maze, x, y, 0,
 		newImage.data(), width, height, 0, dp 
 	);
 	vector<vector<string>> arr1(height, vector<string>(width));
-
-
+	int div;
+	cout << "add threshold (0-10): ";
+	cin >> div;
+	cout << endl;
+	div += 30;
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
 			stbi_uc pixel = newImage[width * i + j];
-			switch ((pixel/35)+1) {
+			switch ((pixel/div)+1) {
 			case 1:
 				arr1[i][j] = "  ";
 				break;
@@ -50,12 +51,11 @@ int main(){
 				arr1[i][j] = "==";
 				break;
 			case 6:
-				arr1[i][j] = "##";
-				break;
-			case 7:
 				arr1[i][j] = "%%";
 				break;
-
+			case 7:
+				arr1[i][j] = "##";
+				break;
 			case 8:
 				arr1[i][j] = "@@";
 				break;
@@ -78,5 +78,4 @@ int main(){
 	file.close();
 	system("pause");
 	return 0;
-	
 }
